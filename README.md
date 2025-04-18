@@ -44,6 +44,7 @@ The system is composed of several key components:
 
 ![image](https://github.com/user-attachments/assets/401d7efc-b345-4f02-a49a-68c702af92d0)
 
+![image](https://github.com/user-attachments/assets/522a79fd-31a6-47b1-adcb-903da03d5809)
 
 After placing orders:
 
