@@ -1,99 +1,112 @@
-# GoHealing - Travel and Accommodation Booking Application
+<img width="570" alt="Assignment_2-1" src="https://github.com/user-attachments/assets/9f26dad9-9b6c-4294-be29-1a646f76a480" />
 
-## Overview
-GoHealing is a JavaFX-based application for booking travel tickets, hotel rooms, and rental cars. The application provides a simple interface for users to place orders for various services and calculate the total cost including applicable discounts.
+# 🚗 GoHealing JavaFX Application
 
-## Features
-- Book plane tickets, train tickets, hotel rooms, and rental cars
-- Automatic discount calculations based on business rules
-- Order history tracking
-- Total cost calculation with Indonesian currency format (Rupiah)
-- Clean and intuitive user interface
+A JavaFX-based desktop application designed to simulate a travel and rental booking system. It allows users to place orders for transportation and accommodations, calculates total costs, and applies relevant discounts. The goal is to provide a simple and interactive UI to understand object-oriented principles and GUI development with JavaFX.
 
-## Application Structure
+## ✨ Features
 
-### Class Hierarchy
+- Place orders for:
+  - ✈️ Plane Tickets
+  - 🚆 Train Tickets
+  - 🏨 Hotel Room Rentals
+  - 🚘 Car Rentals
+- View the **total cost** of all orders, including discounts
+- Get a detailed breakdown of each order's type, transaction cost, and discount applied
+- JavaFX-powered GUI with a clean and minimal layout
+
+## 🧠 How It Works
+
+### 🧩 Architecture
+
+The system is composed of several key components:
+
+- **GoHealingUser**: Stores the list of orders made by the user
+- **Order (Abstract)**: Base class for all order types
+- **Travel & Rental**: Abstract subclasses that separate logic based on travel (Plane/Train) and rental (Hotel/Car)
+- **CalculateTotalWindow**: Displays the full transaction summary in a new window
+- **PlaceOrderWindow**: UI to select and create a new order
+- **GoHealingApplication**: Entry point and main UI to navigate features
+
+### 🔁 Application Flow
+
+1. **Launch App** → Home window with two main buttons: `Place Order` and `Calculate Total`
+2. **Place Order**:
+   - Choose an order type
+   - Fill in distance (for travel) or number of days (for rental)
+   - Submit to add order to user history
+3. **Calculate Total**:
+   - Opens a new window
+   - Displays total amount (after discounts)
+   - Shows each order's transaction and discount breakdown
+
+## 🖥️ Sample UI
+
+![image](https://github.com/user-attachments/assets/401d7efc-b345-4f02-a49a-68c702af92d0)
+
+
+After placing orders:
+
+![image](https://github.com/user-attachments/assets/d1c7a6ae-ed27-42dc-8a7d-7b8faff8cc6b)
+
+
+## 💸 Discount Rules
+
+| Order Type         | Rule                                           |
+|--------------------|------------------------------------------------|
+| **TrainTicket**    | 10% discount if distance < 100 km              |
+| **CarRental**      | 15% discount if rented between 3 and 7 days    |
+| **HotelRoomRental**| 5% per 10-day stay, max 30% total discount     |
+| **PlaneTicket**    | No discount                                    |
+
+## 📁 File Structure
+
 ```
-                  ┌─────────┐
-                  │  Order  │◄───────────┐
-                  └────┬────┘            │
-                       │                 │
-           ┌───────────┴────────────┐    │
-           ▼                        ▼    │ implements
-    ┌────────────┐            ┌─────────┐│
-    │   Travel   │            │  Rental │├─────────┐
-    └─────┬──────┘            └────┬────┘         │
-          │                        │              │
-    ┌─────┴──────┐            ┌────┴─────┐    ┌───┴─────┐
-    ▼            ▼            ▼          ▼    │ Discount │
-┌──────────┐ ┌─────────┐ ┌─────────┐ ┌───────┐└─────────┘
-│PlaneTicket│ │TrainTicket│ │HotelRoom│ │CarRental│
-└──────────┘ └─────────┘ └─────────┘ └───────┘
+GoHealing/
+│
+├── GoHealingApplication.java  # Main launcher
+├── GoHealingUser.java         # Stores user and orders
+├── PlaceOrderWindow.java      # Order creation UI
+├── CalculateTotalWindow.java  # Summary UI
+│
+├── Order.java                 # Abstract base for all orders
+│
+├── Travel.java                # Abstract for travel (Plane, Train)
+│ ├── PlaneTicket.java
+│ └── TrainTicket.java
+│
+├── Rental.java                # Abstract for rentals (Hotel, Car)
+│ ├── HotelRoomRental.java
+│ └── CarRental.java
+│
+└── Discount.java              # Interface for discount calculation
 ```
 
-### Main Components
-- **GoHealingApplication**: Main application class with the primary UI
-- **GoHealingUser**: Manages user data and order list
-- **PlaceOrderWindow**: UI for creating new orders
-- **CalculateTotalWindow**: UI for displaying order summary and totals
+## ▶️ Getting Started
 
-## Business Logic
+### ✅ Requirements
 
-### Order Types
-1. **PlaneTicket**
-   - Cost: 4,000 Rupiah per kilometer
-   - No discount
+- Java 8+
+- JavaFX SDK installed
 
-2. **TrainTicket**
-   - Cost: 750 Rupiah per kilometer
-   - 10% discount for distances less than 100 km
+### 🔧 Build & Run
 
-3. **HotelRoomRental**
-   - Cost: 1,500,000 Rupiah per day
-   - 5% discount for each 10-day period (max 30%)
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/gohealing-javafx.git
+cd gohealing-javafx
+```
 
-4. **CarRental**
-   - Cost: 500,000 Rupiah per day
-   - 15% discount for rentals between 3-7 days
+2. Compile and run:
+```bash
+# Using terminal:
+javac *.java
+java GoHealingApplication
+```
 
-## Usage Flow
+Or import into any Java IDE (like IntelliJ IDEA or Eclipse) and run GoHealingApplication.
 
-1. **Launch Application**
-   - The main screen displays two buttons: "Place Order" and "Calculate Total"
+## 📌 Notes
 
-2. **Place Order**
-   - Click "Place Order" to open order creation window
-   - Select order type (plane, train, hotel, car)
-   - Enter required details (distance or number of days)
-   - Click "Place Order" to add to cart
-
-3. **Calculate Total**
-   - Click "Calculate Total" to view all orders
-   - See breakdown of each order with discounts
-   - View total amount in Indonesian Rupiah format
-
-## Implementation Details
-
-### Key Design Patterns
-- **Inheritance**: Order hierarchy with specialized subclasses
-- **Interface**: Discount interface implemented by Order class
-- **Composition**: GoHealingUser contains a list of Order objects
-
-### Discount Calculation
-Each order type implements its own discount calculation logic:
-- Plane tickets have no discount
-- Train tickets offer 10% off for short distances
-- Hotel rooms provide increasing discounts for longer stays
-- Car rentals have a special discount for medium-length rentals
-
-## Technical Requirements
-- Java 8 or higher
-- JavaFX library
-- JVM-compatible operating system (Windows, macOS, Linux)
-
-## Getting Started
-1. Clone the repository
-2. Ensure JavaFX is properly set up in your development environment
-3. Compile and run the GoHealingApplication class
-4. Start placing orders and calculate totals
-
+- No external libraries are used. All UI is built using native JavaFX.
+- Order IDs are auto-generated using UUID to ensure uniqueness.
