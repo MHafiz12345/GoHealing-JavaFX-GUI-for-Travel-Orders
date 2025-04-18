@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=CarRental
+comment1.params=id\ numDays
+comment1.target=CarRental(java.lang.String,\ int)
+comment2.params=
+comment2.target=double\ calculateTransaction()
+comment3.params=
+comment3.target=double\ calculateDiscount()
+numComments=4
